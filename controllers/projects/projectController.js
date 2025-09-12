@@ -2,13 +2,6 @@ const Project = require("../../models/Project")
 
 const { handle500 } = require("../../utils")
 
-const handle404 = (res) => {
-  return res.status(404).json({
-    error: "HTTP 404 Not Found",
-    message: "Project not found.",
-  })
-}
-
 // POST /api/projects
 const createProject = async (req, res) => {
   try {
@@ -45,8 +38,6 @@ const viewProject = async (req, res) => {
     const projectId = req.params.projectId
     const foundProject = await Project.findById(projectId)
 
-    if (!foundProject) return handle404(res)
-
     return res.status(200).json(foundProject)
   } catch (error) {
     return handle500(error, res)
@@ -58,8 +49,6 @@ const editProject = async (req, res) => {
   try {
     const projectId = req.params.projectId
     const foundProject = await Project.findById(projectId)
-
-    if (!foundProject) return handle404(res)
 
     const editedProject = await Project.findByIdAndUpdate(
       foundProject._id,
@@ -80,8 +69,6 @@ const deleteProject = async (req, res) => {
   try {
     const projectId = req.params.projectId
     const foundProject = await Project.findById(projectId)
-
-    if (!foundProject) return handle404(res)
 
     const deletedProject = await Project.findByIdAndDelete(foundProject._id)
 

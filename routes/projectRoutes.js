@@ -24,7 +24,7 @@ router.get("/:projectId", userOwnsProject, viewProject)
 router.put("/:projectId", userOwnsProject, editProject)
 router.delete("/:projectId", userOwnsProject, deleteProject)
 
-router.post("/:projectId/tasks", createTask)
-router.get("/:projectId/tasks", viewProjectTasks)
+router.post("/:projectId/tasks", userOwnsProject, createTask)
+router.get("/:projectId/tasks", userOwnsProject, viewProjectTasks)
 
 module.exports = router

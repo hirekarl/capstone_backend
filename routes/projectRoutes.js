@@ -13,9 +13,6 @@ const {
 const {
   createTask,
   viewProjectTasks,
-  // viewTask,
-  // editTask,
-  // deleteTask
 } = require("../controllers/taskController")
 
 router.use(authMiddleware)

@@ -2,6 +2,7 @@ const Task = require("../models/Task")
 
 const handle500 = require("../utils")
 
+// POST /api/projects/:projectId/tasks
 const createTask = async (req, res) => {
   try {
     const { title, description, status = "To Do" } = req.body
@@ -20,6 +21,7 @@ const createTask = async (req, res) => {
   }
 }
 
+// GET /api/projects/:projectId/tasks
 const viewProjectTasks = async (req, res) => {
   try {
     const projectId = req.params.projectId
@@ -31,6 +33,7 @@ const viewProjectTasks = async (req, res) => {
   }
 }
 
+// GET /api/tasks/:taskId
 const viewTask = async (req, res) => {
   try {
     const taskId = req.params.taskId
@@ -42,6 +45,7 @@ const viewTask = async (req, res) => {
   }
 }
 
+// PUT /api/tasks/:taskId
 const editTask = async (req, res) => {
   try {
     const taskId = req.params.taskId
@@ -59,6 +63,7 @@ const editTask = async (req, res) => {
   }
 }
 
+// DELETE /api/tasks/:taskId
 const deleteTask = async (req, res) => {
   try {
     const taskId = req.params.taskId

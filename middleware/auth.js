@@ -62,7 +62,6 @@ const userOwnsProject = async (req, res, next) => {
 
 const userOwnsTask = async (req, res, next) => {
   const userId = req.user._id
-  const projectId = req.params.projectId
   const taskId = req.params.taskId
 
   if (!taskId) {
@@ -81,13 +80,7 @@ const userOwnsTask = async (req, res, next) => {
     })
   }
 
-  if (String(foundTask.project) !== String(projectId)) {
-    return res.status(400).json({
-      error: "HTTP 400 Bad Request",
-      message: "Task does not belong to given project.",
-    })
-  }
-
+  const projectId = foundTask.project
   const foundProject = await Project.findById(projectId)
 
   if (String(foundProject.owner) !== String(userId)) {

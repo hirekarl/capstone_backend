@@ -27,4 +27,7 @@ router.delete("/:projectId", userOwnsProject, deleteProject)
 router.post("/:projectId/tasks", userOwnsProject, createTask)
 router.get("/:projectId/tasks", userOwnsProject, viewProjectTasks)
 
+// TODO: Consider making all tasks endpoints nested; use mergeParams.
+// see https://expressjs.com/en/guide/routing.html
+
 module.exports = router

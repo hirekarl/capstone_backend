@@ -2,15 +2,7 @@ const jwt = require("jsonwebtoken")
 
 const User = require("../../models/User")
 
-const { JWT_SECRET, JWT_EXPIRY } = require("../../utils")
-
-const handle500 = (error, res) => {
-  console.error("Internal server error:", error)
-  return res.status(500).json({
-    error: "HTTP 500 Internal Server Error",
-    message: "Couldn't complete the request.",
-  })
-}
+const { JWT_SECRET, JWT_EXPIRY, handle500 } = require("../../utils")
 
 const handle409 = (res) => {
   return res.status(409).json({

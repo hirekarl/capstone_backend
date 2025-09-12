@@ -11,7 +11,7 @@ const authMiddleware = (req, res, next) => {
   if (!token) {
     return res
       .status(401)
-      .json({ error: "HTTP 401 Unauthorized", message: "Token missing." })
+      .json({ error: "HTTP 401 Unauthorized", message: "Token missing or invalid." })
   } else {
     token = token.split(" ").pop().trim()
 
@@ -21,8 +21,8 @@ const authMiddleware = (req, res, next) => {
     } catch (error) {
       console.error(error)
       return res
-        .status(403)
-        .json({ error: "HTTP 403 Forbidden", message: "Token invalid." })
+        .status(401)
+        .json({ error: "HTTP 401 Unauthorized", message: "Token missing or invalid." })
     }
 
     next()

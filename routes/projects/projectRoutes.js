@@ -6,7 +6,7 @@ const {
   viewProject,
   editProject,
   deleteProject,
-} = require("../../controllers/projects")
+} = require("../../controllers/projects/projectController")
 
 router.post("/", /* middleware, */ createProject)
 router.get("/", /* middleware, */ viewAllProjects)

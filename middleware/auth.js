@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken")
 
-const User = require("../models/User")
+// const User = require("../models/User")
 const Project = require("../models/Project")
+const Task = require("../models/Task")
 
 const { JWT_SECRET, JWT_EXPIRY } = require("../utils")
 
@@ -33,6 +34,13 @@ const userOwnsProject = async (req, res, next) => {
   const userId = req.user._id
   const projectId = req.params.projectId
 
+  if (!projectId) {
+    return res.status(400).json({
+      error: "HTTP 400 Bad Request",
+      message: "Missing project ID.",
+    })
+  }
+
   const foundProject = await Project.findById(projectId)
 
   if (!foundProject) {
@@ -52,4 +60,44 @@ const userOwnsProject = async (req, res, next) => {
   next()
 }
 
-module.exports = { authMiddleware, userOwnsProject }
+const userOwnsTask = async (req, res, next) => {
+  const userId = req.user._id
+  const projectId = req.params.projectId
+  const taskId = req.params.taskId
+
+  if (!taskId) {
+    return res.status(400).json({
+      error: "HTTP 400 Bad Request",
+      message: "Missing task ID.",
+    })
+  }
+
+  const foundTask = await Task.findById(taskId)
+
+  if (!foundTask) {
+    return res.status(404).json({
+      error: "HTTP 404 Not Found",
+      message: "Task not found.",
+    })
+  }
+
+  if (String(foundTask.project) !== String(projectId)) {
+    return res.status(400).json({
+      error: "HTTP 400 Bad Request",
+      message: "Task does not belong to given project.",
+    })
+  }
+
+  const foundProject = await Project.findById(projectId)
+
+  if (String(foundProject.owner) !== String(userId)) {
+    return res.status(403).json({
+      error: "HTTP 403 Forbidden",
+      message: "You are not authorized to view or modify this task.",
+    })
+  }
+
+  next()
+}
+
+module.exports = { authMiddleware, userOwnsProject, userOwnsTask }

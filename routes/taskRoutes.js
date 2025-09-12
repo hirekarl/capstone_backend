@@ -1,12 +1,12 @@
 const router = require("express").Router()
 
-const { authMiddleware, userOwnsTask } = require("../../middleware/auth")
+const { authMiddleware, userOwnsTask } = require("../middleware/auth")
 
 const {
   viewTask,
   editTask,
   deleteTask,
-} = require("../../controllers/tasks/taskController")
+} = require("../controllers/taskController")
 
 router.use(authMiddleware)
 

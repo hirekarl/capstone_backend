@@ -1,6 +1,6 @@
 const router = require("express").Router()
 
-const { authMiddleware, userOwnsProject } = require("../../middleware/auth")
+const { authMiddleware, userOwnsProject } = require("../middleware/auth")
 
 const {
   createProject,
@@ -8,7 +8,7 @@ const {
   viewProject,
   editProject,
   deleteProject,
-} = require("../../controllers/projects/projectController")
+} = require("../controllers/projectController")
 
 const {
   createTask,
@@ -16,7 +16,7 @@ const {
   // viewTask,
   // editTask,
   // deleteTask
-} = require("../../controllers/tasks/taskController")
+} = require("../controllers/taskController")
 
 router.use(authMiddleware)
 

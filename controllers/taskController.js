@@ -1,6 +1,6 @@
-const Task = require("../../models/Task")
+const Task = require("../models/Task")
 
-const handle500 = require("../../utils")
+const handle500 = require("../utils")
 
 const createTask = async (req, res) => {
   try {

@@ -1,6 +1,6 @@
-const Project = require("../../models/Project")
+const Project = require("../models/Project")
 
-const { handle500 } = require("../../utils")
+const { handle500 } = require("../utils")
 
 // POST /api/projects
 const createProject = async (req, res) => {

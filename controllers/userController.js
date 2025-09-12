@@ -1,8 +1,8 @@
 const jwt = require("jsonwebtoken")
 
-const User = require("../../models/User")
+const User = require("../models/User")
 
-const { JWT_SECRET, JWT_EXPIRY, handle500 } = require("../../utils")
+const { JWT_SECRET, JWT_EXPIRY, handle500 } = require("../utils")
 
 const handle409 = (res) => {
   return res.status(409).json({

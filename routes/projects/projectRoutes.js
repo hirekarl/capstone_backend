@@ -1,6 +1,6 @@
 const router = require("express").Router()
 
-const { authMiddleware } = require("../../middleware/auth")
+const { authMiddleware, userOwnsProject } = require("../../middleware/auth")
 
 const {
   createProject,
@@ -14,8 +14,8 @@ router.use(authMiddleware)
 
 router.post("/", createProject)
 router.get("/", viewAllProjects)
-router.get("/:projectId", viewProject)
-router.put("/:projectId", editProject)
-router.delete("/:projectId", deleteProject)
+router.get("/:projectId", userOwnsProject, viewProject)
+router.put("/:projectId", userOwnsProject, editProject)
+router.delete("/:projectId", userOwnsProject, deleteProject)
 
 module.exports = router

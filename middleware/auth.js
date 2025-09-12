@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken")
 
 const User = require("../models/User")
+const Project = require("../models/Project")
 
 const { JWT_SECRET, JWT_EXPIRY } = require("../utils")
 
@@ -28,4 +29,27 @@ const authMiddleware = (req, res, next) => {
   }
 }
 
-module.exports = { authMiddleware }
+const userOwnsProject = async (req, res, next) => {
+  const userId = req.user._id
+  const projectId = req.params.projectId
+
+  const foundProject = await Project.findById(projectId)
+
+  if (!foundProject) {
+    return res.status(404).json({
+      error: "HTTP 404 Not Found",
+      message: "Project not found.",
+    })
+  }
+
+  if (String(foundProject.owner) !== String(userId)) {
+    return res.status(403).json({
+      error: "HTTP 403 Forbidden",
+      message: "You are not authorized to view or modify this project.",
+    })
+  }
+
+  next()
+}
+
+module.exports = { authMiddleware, userOwnsProject }

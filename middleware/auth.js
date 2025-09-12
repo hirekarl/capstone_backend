@@ -7,27 +7,24 @@ const { JWT_SECRET, JWT_EXPIRY, handle401 } = require("../utils")
 
 const authMiddleware = (req, res, next) => {
   let token = req.headers.authorization
-
   if (!token) {
     return handle401(res)
-  } else {
-    token = token.split(" ").pop().trim()
-
-    try {
-      const { data } = jwt.verify(token, JWT_SECRET, { maxAge: JWT_EXPIRY })
-      req.user = data
-    } catch (_error) {
-      return handle401(res)
-    }
-
-    next()
   }
+
+  token = token.split(" ").pop().trim()
+
+  try {
+    const { data } = jwt.verify(token, JWT_SECRET, { maxAge: JWT_EXPIRY })
+    req.user = data
+  } catch (_error) {
+    return handle401(res)
+  }
+
+  next()
 }
 
 const userOwnsProject = async (req, res, next) => {
-  const userId = req.user._id
   const projectId = req.params.projectId
-
   if (!projectId) {
     return res.status(400).json({
       error: "HTTP 400 Bad Request",
@@ -36,7 +33,6 @@ const userOwnsProject = async (req, res, next) => {
   }
 
   const foundProject = await Project.findById(projectId)
-
   if (!foundProject) {
     return res.status(404).json({
       error: "HTTP 404 Not Found",
@@ -44,6 +40,7 @@ const userOwnsProject = async (req, res, next) => {
     })
   }
 
+  const userId = req.user._id
   if (String(foundProject.owner) !== String(userId)) {
     return res.status(403).json({
       error: "HTTP 403 Forbidden",
@@ -55,9 +52,7 @@ const userOwnsProject = async (req, res, next) => {
 }
 
 const userOwnsTask = async (req, res, next) => {
-  const userId = req.user._id
   const taskId = req.params.taskId
-
   if (!taskId) {
     return res.status(400).json({
       error: "HTTP 400 Bad Request",
@@ -66,7 +61,6 @@ const userOwnsTask = async (req, res, next) => {
   }
 
   const foundTask = await Task.findById(taskId)
-
   if (!foundTask) {
     return res.status(404).json({
       error: "HTTP 404 Not Found",
@@ -76,7 +70,7 @@ const userOwnsTask = async (req, res, next) => {
 
   const projectId = foundTask.project
   const foundProject = await Project.findById(projectId)
-
+  const userId = req.user._id
   if (String(foundProject.owner) !== String(userId)) {
     return res.status(403).json({
       error: "HTTP 403 Forbidden",

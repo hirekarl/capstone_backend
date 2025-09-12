@@ -1,5 +1,7 @@
 const router = require("express").Router()
 
+const { authMiddleware } = require("../../middleware/auth")
+
 const {
   createProject,
   viewAllProjects,
@@ -8,10 +10,12 @@ const {
   deleteProject,
 } = require("../../controllers/projects/projectController")
 
-router.post("/", /* middleware, */ createProject)
-router.get("/", /* middleware, */ viewAllProjects)
-router.get("/:projectId", /* middleware, */ viewProject)
-router.put("/:projectId", /* middleware, */ editProject)
-router.delete("/:projectId", /* middleware, */ deleteProject)
+router.use(authMiddleware)
+
+router.post("/", createProject)
+router.get("/", viewAllProjects)
+router.get("/:projectId", viewProject)
+router.put("/:projectId", editProject)
+router.delete("/:projectId", deleteProject)
 
 module.exports = router

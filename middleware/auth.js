@@ -3,26 +3,21 @@ const jwt = require("jsonwebtoken")
 const Project = require("../models/Project")
 const Task = require("../models/Task")
 
-const { JWT_SECRET, JWT_EXPIRY } = require("../utils")
+const { JWT_SECRET, JWT_EXPIRY, handle401 } = require("../utils")
 
 const authMiddleware = (req, res, next) => {
   let token = req.headers.authorization
 
   if (!token) {
-    return res
-      .status(401)
-      .json({ error: "HTTP 401 Unauthorized", message: "Token missing or invalid." })
+    return handle401(res)
   } else {
     token = token.split(" ").pop().trim()
 
     try {
       const { data } = jwt.verify(token, JWT_SECRET, { maxAge: JWT_EXPIRY })
       req.user = data
-    } catch (error) {
-      console.error(error)
-      return res
-        .status(401)
-        .json({ error: "HTTP 401 Unauthorized", message: "Token missing or invalid." })
+    } catch (_error) {
+      return handle401(res)
     }
 
     next()

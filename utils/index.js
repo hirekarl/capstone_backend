@@ -13,10 +13,18 @@ const handle500 = (error, res) => {
   })
 }
 
+const handle401 = (res) => {
+  return res.status(401).json({
+    error: "HTTP 401 Unauthorized",
+    message: "Token missing or invalid.",
+  })
+}
+
 module.exports = {
   MONGO_URI,
   PORT,
   JWT_SECRET,
   JWT_EXPIRY,
   handle500,
+  handle401,
 }

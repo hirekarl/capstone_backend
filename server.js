@@ -19,7 +19,7 @@ const run = async () => {
   app.use(cors(corsOptions))
   app.use(express.json())
 
-  app.use("/api", routes)
+  app.use("/api/v1", routes)
 
   app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`)

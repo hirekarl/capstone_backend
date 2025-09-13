@@ -4,6 +4,7 @@ const MONGO_URI = process.env.MONGO_URI
 const PORT = process.env.PORT
 const JWT_SECRET = process.env.JWT_SECRET
 const JWT_EXPIRY = "2h"
+const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN
 
 const handle500 = (error, res) => {
   console.error("Internal server error:", error)
@@ -25,6 +26,7 @@ module.exports = {
   PORT,
   JWT_SECRET,
   JWT_EXPIRY,
+  CLIENT_ORIGIN,
   handle500,
   handle401,
 }

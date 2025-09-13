@@ -44,7 +44,7 @@ const viewProject = async (req, res) => {
   }
 }
 
-// PUT /api/projects/:projectId
+// PATCH /api/projects/:projectId
 const editProject = async (req, res) => {
   try {
     const projectId = req.params.projectId

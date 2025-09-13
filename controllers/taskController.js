@@ -45,7 +45,7 @@ const viewTask = async (req, res) => {
   }
 }
 
-// PUT /api/tasks/:taskId
+// PATCH /api/tasks/:taskId
 const editTask = async (req, res) => {
   try {
     const taskId = req.params.taskId

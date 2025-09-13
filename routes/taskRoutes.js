@@ -20,7 +20,7 @@ router.post("/", userOwnsProject, createTask)
 router.get("/", userOwnsProject, viewProjectTasks)
 
 router.get("/:taskId", userOwnsTask, viewTask)
-router.put("/:taskId", userOwnsTask, editTask)
+router.patch("/:taskId", userOwnsTask, editTask)
 router.delete("/:taskId", userOwnsTask, deleteTask)
 
 module.exports = router

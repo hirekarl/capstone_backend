@@ -18,7 +18,7 @@ router.post("/", createProject)
 router.get("/", viewAllProjects)
 
 router.get("/:projectId", userOwnsProject, viewProject)
-router.put("/:projectId", userOwnsProject, editProject)
+router.patch("/:projectId", userOwnsProject, editProject)
 router.delete("/:projectId", userOwnsProject, deleteProject)
 
 router.use("/:projectId/tasks", taskRoutes)

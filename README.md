@@ -1,16 +1,47 @@
 # Capstone: Backend
 
-[Karl Johnson](https://github.com/hirekarl)  
+[Karl Johnson](https://www.google.com/search?q=https://github.com/hirekarl)  
 2025-RTT-30  
-<time datetime="2025-09-12">2025-09-12</time>
-
-![Alt text for preview image.](./preview.png)
+<time datetime="2025-09-12">2025-09-12</time>  
 
 ## Overview
 
 ### API Documentation (Version 1)
 
 All endpoints are prefixed with `/api/v1`.
+
+---
+
+#### Getting Started
+
+**Prerequisites:**
+
+- [Node.js](https://nodejs.org/en)
+- [npm](https://www.npmjs.com/) (Node Package Manager)
+- [MongoDB](https://www.mongodb.com/)
+
+**Installation:**
+
+1.  Clone the repository.
+2.  Install the dependencies: `npm install`
+3.  Create a `.env` file in the root directory and add the required environment variables, such as:
+    ```bash
+    PORT=3001
+    MONGODB_URI=mongodb+srv://<username>:<password>@<cluster_name>.mongodb.net/<database_name>?retryWrites=true&w=majority
+    CLIENT_ORIGIN=http://localhost:5173
+    JWT_SECRET=<SECRET_JWT_KEY>
+    ```
+4.  Start the server: `npm run dev`
+
+---
+
+#### Packages
+
+- [`express`](https://www.npmjs.com/package/express): For building the RESTful API.
+- [`mongoose`](https://www.npmjs.com/package/mongoose): For MongoDB object data modeling.
+- [`jsonwebtoken`](https://www.npmjs.com/package/jsonwebtoken): For user authentication and authorization.
+- [`bcrypt`](https://www.npmjs.com/package/bcrypt): For secure password hashing.
+- [`cors`](https://www.npmjs.com/package/cors): For handling Cross-Origin Resource Sharing.
 
 ---
 
@@ -52,6 +83,13 @@ All endpoints, except for user registration and login, require a JSON Web Token 
         "message": "User with this email address already exists."
       }
       ```
+    - `500 Internal Server Error`: For unexpected server-side issues.
+      ```json
+      {
+        "error": "HTTP 500 Internal Server Error",
+        "message": "An unexpected server error occurred."
+      }
+      ```
 
 - `POST /api/v1/users/login`
 
@@ -82,6 +120,13 @@ All endpoints, except for user registration and login, require a JSON Web Token 
         "message": "Incorrect email address or password."
       }
       ```
+    - `500 Internal Server Error`: For unexpected server-side issues.
+      ```json
+      {
+        "error": "HTTP 500 Internal Server Error",
+        "message": "An unexpected server error occurred."
+      }
+      ```
 
 ---
 
@@ -110,12 +155,7 @@ All endpoints, except for user registration and login, require a JSON Web Token 
     ```
   - **Error Responses:**
     - `401 Unauthorized`: If the provided JWT is invalid, expired, or missing.
-    ```json
-    {
-      "error": "HTTP 401 Unauthorized",
-      "message": "Incorrect email address or password."
-    }
-    ```
+    - `500 Internal Server Error`: For unexpected server-side issues.
 
 - `GET /api/v1/projects`
 
@@ -133,6 +173,7 @@ All endpoints, except for user registration and login, require a JSON Web Token 
     ```
   - **Error Responses:**
     - `401 Unauthorized`: If the provided JWT is invalid, expired, or missing.
+    - `500 Internal Server Error`: For unexpected server-side issues.
 
 - `GET /api/v1/projects/:projectId`
 
@@ -169,6 +210,13 @@ All endpoints, except for user registration and login, require a JSON Web Token 
         "message": "Project not found."
       }
       ```
+    - `500 Internal Server Error`: For unexpected server-side issues.
+      ```json
+      {
+        "error": "HTTP 500 Internal Server Error",
+        "message": "An unexpected server error occurred."
+      }
+      ```
 
 - `PATCH /api/v1/projects/:projectId`
 
@@ -194,6 +242,7 @@ All endpoints, except for user registration and login, require a JSON Web Token 
     - `401 Unauthorized`: If the provided JWT is invalid, expired, or missing.
     - `403 Forbidden`: If the authenticated user is not the project owner.
     - `404 Not Found`: If the project is not found.
+    - `500 Internal Server Error`: For unexpected server-side issues.
 
 - `DELETE /api/v1/projects/:projectId`
 
@@ -212,6 +261,7 @@ All endpoints, except for user registration and login, require a JSON Web Token 
     - `401 Unauthorized`: If the provided JWT is invalid, expired, or missing.
     - `403 Forbidden`: If the authenticated user is not the project owner.
     - `404 Not Found`: If the project is not found.
+    - `500 Internal Server Error`: For unexpected server-side issues.
 
 ---
 
@@ -245,6 +295,7 @@ All endpoints, except for user registration and login, require a JSON Web Token 
     - `401 Unauthorized`: If the provided JWT is invalid, expired, or missing.
     - `403 Forbidden`: If the authenticated user is not the project owner.
     - `404 Not Found`: If the project is not found.
+    - `500 Internal Server Error`: For unexpected server-side issues.
 
 - `GET /api/v1/projects/:projectId/tasks`
 
@@ -266,6 +317,7 @@ All endpoints, except for user registration and login, require a JSON Web Token 
     - `401 Unauthorized`: If the provided JWT is invalid, expired, or missing.
     - `403 Forbidden`: If the authenticated user is not the project owner.
     - `404 Not Found`: If the project is not found.
+    - `500 Internal Server Error`: For unexpected server-side issues.
 
 - `GET /api/v1/projects/:projectId/tasks/:taskId`
 
@@ -303,6 +355,7 @@ All endpoints, except for user registration and login, require a JSON Web Token 
         "message": "Task not found."
       }
       ```
+    - `500 Internal Server Error`: For unexpected server-side issues.
 
 - `PATCH /api/v1/projects/:projectId/tasks/:taskId`
 
@@ -330,6 +383,7 @@ All endpoints, except for user registration and login, require a JSON Web Token 
     - `401 Unauthorized`: If the provided JWT is invalid, expired, or missing.
     - `403 Forbidden`: If the authenticated user is not the task's project owner.
     - `404 Not Found`: If the task is not found.
+    - `500 Internal Server Error`: For unexpected server-side issues.
 
 - `DELETE /api/v1/projects/:projectId/tasks/:taskId`
 
@@ -349,3 +403,4 @@ All endpoints, except for user registration and login, require a JSON Web Token 
     - `401 Unauthorized`: If the provided JWT is invalid, expired, or missing.
     - `403 Forbidden`: If the authenticated user is not the task's project owner.
     - `404 Not Found`: If the task is not found.
+    - `500 Internal Server Error`: For unexpected server-side issues.

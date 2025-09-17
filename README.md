@@ -1,6 +1,6 @@
 # Capstone: Backend
 
-[Karl Johnson](https://www.google.com/search?q=https://github.com/hirekarl)  
+[Karl Johnson](https://github.com/hirekarl)  
 2025-RTT-30  
 <time datetime="2025-09-12">2025-09-12</time>  
 

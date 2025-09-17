@@ -68,9 +68,7 @@ const login = async (req, res) => {
 }
 
 const validateToken = async (_req, res) => {
-  return res.status(200).json({
-    message: "Token validated.",
-  })
+  return res.sendStatus(200)
 }
 
 module.exports = { register, login, validateToken }

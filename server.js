@@ -22,7 +22,7 @@ const run = async () => {
   app.use("/api/v1", routes)
 
   app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`)
+    console.log(`Server running on port ${PORT}.`)
   })
 }
 

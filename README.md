@@ -1,4 +1,4 @@
-# Capstone: Backend
+# Per Scholas Software Engineering Capstone Project: Back-End
 
 [Karl Johnson](https://github.com/hirekarl)  
 2025-RTT-30  

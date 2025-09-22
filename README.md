@@ -6,6 +6,10 @@
 
 ## Overview
 
+### URLs
+- Deployed app: https://hirekarl-ps-capstone.netlify.app/
+- Front-end source: https://github.com/hirekarl/capstone_frontend
+
 ### API Documentation (Version 1)
 
 All endpoints are prefixed with `/api/v1`.
